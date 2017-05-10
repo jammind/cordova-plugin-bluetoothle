@@ -265,7 +265,7 @@ NSString *const operationWrite = @"write";
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
   }
 
-  [peripheralManager removeService:service]; //Need to store CBMutableService
+  [peripheralManager removeService:[service copy]]; //Need to store CBMutableService
 
   [servicesHash removeObjectForKey:service.UUID];
 
@@ -451,7 +451,7 @@ NSString *const operationWrite = @"write";
 
   NSData* value = [self getValue:obj];
 
-  BOOL result = [peripheralManager updateValue:value forCharacteristic:checkCharacteristic onSubscribedCentrals:nil]; //TODO need to store CBMutableCharacteristic
+  BOOL result = [peripheralManager updateValue:value forCharacteristic:[checkCharacteristic copy] onSubscribedCentrals:nil]; //TODO need to store CBMutableCharacteristic
 
   NSNumber* resultAsObject = [NSNumber numberWithBool:result];
 
